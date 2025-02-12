@@ -1,0 +1,468 @@
+Count of specific string
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string text = "haveagoodday"; // Use double quotes for string literals
+    char targetChar = 'a'; // Use single quotes for character literals
+    int occurrenceCount = 0;
+
+    // Iterate through each character in the string
+    for (char c : text) {
+        if (c == targetChar) {
+            occurrenceCount++; // Increment the count if the character matches
+        }
+    }
+
+    // Output the result
+    cout << "The character '" << targetChar << "' occurs " << occurrenceCount << " times in the text." << endl;
+    return 0;
+}
+
+
+Unsold Products
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> shiftZerosToEnd(const vector<int>& sales) {
+    vector<int> result(sales.size(), 0); // Initialize result array with zeros
+    int index = 0;
+
+    // Copy non-zero elements to the result array
+    for (int sale : sales) {
+        if (sale != 0) {
+            result[index++] = sale;
+        }
+    }
+    // The rest of the result array is already initialized to zero
+    return result;
+}
+
+int main() {
+    vector<int> sales = {5, 2, 0, 8, 0, 2, 1}; // Example input
+    vector<int> result = shiftZerosToEnd(sales);
+
+    // Output the result
+    for (int num : result) {
+        cout << num << " "; // Print each element in the result array
+    }
+    cout << endl;
+    return 0;
+}
+
+
+
+LCS 
+
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int LCS(string s1, string s2, string s3) {
+    int l1 = s1.length(), l2 = s2.length(), l3 = s3.length();
+    vector<vector<vector<int>>> dp(l1 + 1, vector<vector<int>>(l2 + 1, vector<int>(l3 + 1, 0)));
+
+    for (int i = 1; i <= l1; i++) {
+        for (int j = 1; j <= l2; j++) {
+            for (int k = 1; k <= l3; k++) {
+                if (s1[i - 1] == s2[j - 1] && s2[j - 1] == s3[k - 1]) {
+                    dp[i][j][k] = dp[i - 1][j - 1][k - 1] + 1;
+                } else {
+                    dp[i][j][k] = max({dp[i - 1][j][k], dp[i][j - 1][k], dp[i][j][k - 1]});
+                }
+            }
+        }
+    }
+    return dp[l1][l2][l3];
+}
+
+int main() {
+    string s1 = "abcde", s2 = "ace", s3 = "aec"; // Example input
+    cout << "Length of LCS: " << LCS(s1, s2, s3) << endl; // Output
+    return 0;
+}
+
+
+Space Separated strings
+
+
+#include <iostream>
+#include <sstream>
+#include <map>
+#include <set>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    string text = "cat batman latt matter cat matter cat"; // Example input
+    map<string, int> wordCount;
+    stringstream ss(text);
+    string word;
+
+    while (ss >> word) {
+        wordCount[word]++;
+    }
+
+    set<string> repeatedWords;
+    for (const auto& pair : wordCount) {
+        if (pair.second > 1) {
+            repeatedWords.insert(pair.first);
+        }
+    }
+
+    if (repeatedWords.empty()) {
+        cout << "NA" << endl; // Output if no words are repeated
+    } else {
+        vector<string> result(repeatedWords.begin(), repeatedWords.end());
+        sort(result.begin(), result.end());
+        for (const string& w : result) {
+            cout << w << " "; // Output repeated words
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+
+ Product IDs
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int numOfProducts = 6; // Example input
+    vector<char> productIDs = {'a', 'v', 'i', 'k', 'e', 'l'};
+    int desktopCount = 0;
+
+    for (char id : productIDs) {
+        if (id == 'v' || id == 'k' || id == 'l') {
+            desktopCount++;
+        }
+    }
+
+    cout << desktopCount << endl; // Output
+    return 0;
+}
+
+
+Count of trailing zeros in fact value
+
+
+#include <iostream>
+using namespace std;
+
+int countTrailingZeros(int num) {
+    int count = 0;
+    for (int i = 5; num / i >= 1; i *= 5) {
+        count += num / i;
+    }
+    return count;
+}
+
+int main() {
+    int num = 5; // Example input
+    cout << countTrailingZeros(num) << endl; // Output
+    return 0;
+}
+
+
+ Decimal to Binary
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+string decimalToBinary(int num) {
+    string binary = "";
+    while (num > 0) {
+        binary = to_string(num % 2) + binary;
+        num /= 2;
+    }
+    return binary;
+}
+
+int main() {
+    int num = 25; // Example input
+    cout << decimalToBinary(num) << endl; // Output
+    return 0;
+}
+
+Unsold Products
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> shiftZerosToEnd(vector<int>& sales) {
+    int n = sales.size();
+    vector<int> result(n, 0);
+    int index = 0;
+
+    for (int sale : sales) {
+        if (sale != 0) {
+            result[index++] = sale;
+        }
+    }
+    return result;
+}
+
+int main() {
+    vector<int> sales = {5, 2, 0, 8, 0, 2, 1}; // Example input
+    vector<int> result = shiftZerosToEnd(sales);
+
+    for (int num : result) {
+        cout << num << " "; // Output
+    }
+    cout << endl;
+    return 0;
+}
+
+Alice and String
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int longestUninterruptedSubstring(string s) {
+    int maxLength = 0, currentLength = 0;
+
+    for (char c : s) {
+        if (c == '.') {
+            maxLength = max(maxLength, currentLength);
+            currentLength = 0;
+        } else {
+            currentLength++;
+        }
+    }
+    return max(maxLength, currentLength);
+}
+
+int main() {
+    string s = "abc.b.cc"; // Example input
+    cout << longestUninterruptedSubstring(s) << endl; // Output
+    return 0;
+}
+
+
+ File version
+
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int latestFileVersion(const vector<string>& files) {
+    int latestVersion = -1;
+
+    for (const string& file : files) {
+        if (file.find("File_") == 0) {
+            int version = stoi(file.substr(5));
+            latestVersion = max(latestVersion, version);
+        }
+    }
+    return latestVersion;
+}
+
+int main() {
+    vector<string> files = {"File_1", "File_3", "File_2"}; // Example input
+    cout << latestFileVersion(files) << endl; // Output
+    return 0;
+}
+
+Even Odd
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+string evenOddLabels(const vector<int>& arr) {
+    string result = "";
+    for (int num : arr) {
+        result += (num % 2 == 0) ? "Even" : "Odd";
+    }
+    return result;
+}
+
+int main() {
+    vector<int> arr = {1, 2, 3, 4, 5, 6}; // Example input
+    cout << evenOddLabels(arr) << endl; // Output
+    return 0;
+}
+
+Magical Number
+
+#include <iostream>
+using namespace std;
+
+int countMagicalNumbers(int N) {
+    int count = 0;
+
+    for (int i = 1; i <= N; i++) {
+        int sum = 0;
+        int num = i;
+
+        while (num > 0) {
+            sum += (num % 2 == 0) ? 1 : 2; // Replace 0 with 1 and 1 with 2
+            num /= 2;
+        }
+
+        if (sum % 2 != 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    int N = 5; // Example input
+    cout << countMagicalNumbers(N) << endl; // Output
+    return 0;
+}
+
+
+Rearrangement of Bits
+
+#include <iostream>
+using namespace std;
+
+int rearrangeBits(int N) {
+    int count = 0;
+
+    while (N > 0) {
+        if (N & 1) count++; // Count set bits
+        N >>= 1; // Right shift
+    }
+
+    return (1 << count) - 1; // Create the minimum number with set bits
+}
+
+int main() {
+    int N = 10; // Example input
+    cout << rearrangeBits(N) << endl; // Output
+    return 0;
+}
+
+Minimum Badness
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int minimumBadness(string S) {
+    int badness = 0;
+
+    for (int i = 1; i < S.length(); i++) {
+        if (S[i] != S[i - 1] && S[i] != 'W' && S[i - 1] != 'W') {
+            badness++;
+        }
+    }
+    return badness;
+}
+
+int main() {
+    string S = "RRWBWBW"; // Example input
+    cout << minimumBadness(S) << endl; // Output
+    return 0;
+}
+
+Number Of bids
+
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+int countPairsWithTargetDifference(const vector<int>& projectCost, int target) {
+    unordered_set<int> seen;
+    unordered_set<int> pairs;
+
+    for (int cost : projectCost) {
+        if (seen.count(cost - target)) {
+            pairs.insert(cost - target);
+        }
+        if (seen.count(cost + target)) {
+            pairs.insert(cost);
+        }
+        seen.insert(cost);
+    }
+    return pairs.size();
+}
+
+int main() {
+    vector<int> projectCost = {1, 3, 5}; // Example input
+    int target = 2; // Example input
+    cout << countPairsWithTargetDifference(projectCost, target) << endl; // Output
+    return 0;
+}
+
+reversing a linked list
+
+#include <iostream>
+using namespace std;
+
+// Definition for singly-linked list.
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+// Function to reverse the linked list
+ListNode* reverseList(ListNode* head) {
+    ListNode* prev = nullptr; // Previous node
+    ListNode* current = head; // Current node
+    ListNode* next = nullptr; // Next node
+
+    while (current != nullptr) {
+        next = current->next; // Store next node
+        current->next = prev; // Reverse the link
+        prev = current;       // Move prev to current
+        current = next;       // Move to next node
+    }
+    return prev; // New head of the reversed list
+}
+
+// Function to print the linked list
+void printList(ListNode* head) {
+    ListNode* current = head;
+    while (current != nullptr) {
+        cout << current->val << " -> ";
+        current = current->next;
+    }
+    cout << "nullptr" << endl;
+}
+
+int main() {
+    // Creating a linked list: 1 -> 2 -> 3 -> 4 -> nullptr
+    ListNode* head = new ListNode(1);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(3);
+    head->next->next->next = new ListNode(4);
+
+    cout << "Original Linked List: ";
+    printList(head); // Print original list
+
+    head = reverseList(head); // Reverse the linked list
+
+    cout << "Reversed Linked List: ";
+    printList(head); // Print reversed list
+
+    // Clean up memory (optional)
+    while (head != nullptr) {
+        ListNode* temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    return 0;
+}
+
